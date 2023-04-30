@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sneakers</title>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a th:href="@{/add-sneaker}">Add Sneaker</a></li>
+        <li><a th:href="@{/logout}">Logout</a></li>
+</nav>
+<h1>Sneakers</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>Image</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- iterate over each sneaker and display its information -->
+    <tr th:each="sneaker : ${sneakers}">
+        <td th:text="${sneaker.id}"></td>
+        <td th:text="${sneaker.name}"></td>
+        <td th:text="${sneaker.brand}"></td>
+        <td><img th:src="${sneaker.imageURL}" alt="" width="100"></td>
+        <td th:text="${sneaker.price}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

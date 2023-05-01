@@ -28,8 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
                 .antMatchers("/sneakers").authenticated()
-                .antMatchers("/sneakers/addForm").hasRole("ADMIN")
-                .antMatchers("/sneakers/add").hasRole("ADMIN")
+                .antMatchers("/sneakers/user").authenticated()
+                .antMatchers("/sneakers/admin/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/loginForm")
@@ -41,8 +41,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutUrl("/logout")
                 .invalidateHttpSession(true)
-                .logoutSuccessUrl("/loginForm")
-                .permitAll();
+                .logoutSuccessUrl("/home")
+                .permitAll()
+                .and()
+                .exceptionHandling()
+                .accessDeniedPage("/access-error");
     }
 
     @Autowired

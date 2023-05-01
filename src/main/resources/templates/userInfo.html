@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Info</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .card {
+            height: 100%;
+        }
+
+        .card-img-top {
+            object-fit: contain;
+            height: 200px;
+            width: 100%;
+        }
+    </style>
+
+</head>
+
+
+<div class="container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <h1>User Information</h1>
+                <p class="lead">Username: <span th:text="${user.username}"></span></p>
+                <p class="lead">Balance: <span th:text="${user.balance}"></span></p>
+            </div>
+        </div>
+    <h1 class="text-center my-5">Sneakers</h1>
+    <div class="row">
+        <!-- iterate over each sneaker and display its information -->
+        <div th:each="sneaker : ${sneakers}" class="col-md-4">
+            <div class="card mb-4">
+                <img th:src="${sneaker.imageURL}" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${sneaker.getName()}"></h5>
+                    <p class="card-text" th:text="${sneaker.getBrand()}"></p>
+                    <p class="card-text" th:text="'$' + ${sneaker.getPrice()}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

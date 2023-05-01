@@ -79,4 +79,8 @@ public class User  implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public void addSneaker(Sneaker sneaker) {
+        this.sneakers.add(sneaker);
+    }
 }

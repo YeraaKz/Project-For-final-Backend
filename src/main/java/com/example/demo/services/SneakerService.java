@@ -28,6 +28,7 @@ public class SneakerService {
     public List<Sneaker> findAll() {
         return repository.findAll();
     }
+
     @Transactional
     public void addSneaker(Sneaker sneaker) {
         repository.save(sneaker);

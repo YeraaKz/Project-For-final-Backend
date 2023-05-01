@@ -3,35 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Sneakers</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .card {
+            height: 100%;
+        }
+
+        .card-img-top {
+            object-fit: contain;
+            height: 200px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-<nav>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a th:href="@{/add-sneaker}">Add Sneaker</a></li>
-        <li><a th:href="@{/logout}">Logout</a></li>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Sneakers</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/home}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/sneakers/admin/addForm}">Add Sneaker</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/logout}">Logout</a>
+            </li>
+        </ul>
+    </div>
+    <div class="navbar-text">
+        <a href="/sneakers/user" class="btn btn-outline-primary mr-2">Profile</a>
+        Balance: <strong th:text="${user.getBalance()}"></strong>
+    </div>
 </nav>
-<h1>Sneakers</h1>
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Brand</th>
-        <th>Image</th>
-        <th>Price</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!-- iterate over each sneaker and display its information -->
-    <tr th:each="sneaker : ${sneakers}">
-        <td th:text="${sneaker.id}"></td>
-        <td th:text="${sneaker.name}"></td>
-        <td th:text="${sneaker.brand}"></td>
-        <td><img th:src="${sneaker.imageURL}" alt="" width="100"></td>
-        <td th:text="${sneaker.price}"></td>
-    </tr>
-    </tbody>
-</table>
+<div class="container">
+    <h1 class="text-center my-5">Sneakers</h1>
+    <div class="row">
+        <!-- iterate over each sneaker and display its information -->
+        <div th:each="sneaker : ${sneakers}" class="col-md-4">
+            <div class="card mb-4">
+                <img th:src="${sneaker.imageURL}" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${sneaker.getName()}"></h5>
+                    <p class="card-text" th:text="${sneaker.getBrand()}"></p>
+                    <p class="card-text" th:text="'$' + ${sneaker.getPrice()}"></p>
+                    <form th:action="@{/sneakers/{id}/buy(id=${sneaker.getId()})}" method="post">
+                        <button type="submit" class="btn btn-primary" th:disabled="${user.getSneakers().contains(sneaker)}">Buy</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

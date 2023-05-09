@@ -77,7 +77,7 @@ public class AuthController {
             return "redirect:/loginForm";
         }
 
-        return "redirect:/sneaker-shop/sneakers";
+        return "redirect:/sneakers";
     }
 
 }

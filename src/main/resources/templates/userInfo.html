@@ -26,6 +26,7 @@
                 <h1>User Information</h1>
                 <p class="lead">Username: <span th:text="${user.username}"></span></p>
                 <p class="lead">Balance: <span th:text="${user.balance}"></span></p>
+                <a class="btn btn-primary" th:href="@{/sneakers/user/{id}/edit(id=${user.id})}">Edit</a></p>
             </div>
         </div>
     <h1 class="text-center my-5">Sneakers</h1>

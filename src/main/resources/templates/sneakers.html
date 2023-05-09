@@ -29,8 +29,11 @@
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/home}">Home</a>
             </li>
-            <li class="nav-item">
+            <li th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" class="nav-item">
                 <a class="nav-link" th:href="@{/sneakers/admin/addForm}">Add Sneaker</a>
+            </li>
+            <li th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" class="nav-item">
+                <a class="nav-link" th:href="@{/sneakers/admin/users}">All Users</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/logout}">Logout</a>
@@ -61,5 +64,10 @@
         </div>
     </div>
 </div>
+<footer class="bg-dark py-3">
+    <div class="container text-center">
+        <p class="text-white">Made by Imanbek</p>
+    </div>
+</footer>
 </body>
 </html>
